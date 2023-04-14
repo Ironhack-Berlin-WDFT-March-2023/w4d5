@@ -145,3 +145,81 @@ const [, , , third, , fifth] = numbers
 // Extract all numbers but the first one
 // const greaterThan0 = numbers.slice(1)
 const [, ...greaterThan0] = numbers
+
+// -----------------------------------------------------------------------------
+
+// Spread operator
+// The spread operator allows iterables (arrays, objects, strings) to be expanded into single arguments/elements
+// In simple words: The spread operator unpacks elements of an array.
+
+// We used it before to copy an array:
+const numbers1 = [1, 2, 3]
+const copyOfNumbers = [...numbers1]
+
+// We can also add two arrays together:
+const numbers2 = [4, 5, 6]
+const allNumbers = [...numbers1, ...numbers2]
+console.log(allNumbers)
+// We can also do it with concat: numbers1.concat(numbers2)
+
+// If you use Math.max(), you also need the spread-operator:
+console.log(Math.max(...allNumbers))
+
+
+// Spread as the rest operator
+// The spread operator as a parameter in a function represents an infinite number of arguments as an array
+
+function sum(...numbers) {
+    return numbers.reduce((acc, val) => {
+        return acc + val
+    })
+}
+
+const allNumbersSum = sum(allNumbers)
+console.log(allNumbersSum)
+
+// You can also use the arguments object, which represents all arguments
+
+// You can also choose to get the first two parameters as variables and then use the rest operator
+
+function sum2(first, second, ...numbers) {
+    console.log(numbers)
+}
+
+sum2(allNumbers)
+
+// Challenge 5
+// Create a function that recieves any number of strings as arguments and return the longest string
+
+function longestString(...strings) {
+    let longest = ""
+    
+    for (let i = 0; i < strings.length; i++) {
+        if (strings[i].length > longest.length) {
+            longest = strings[i]
+        }
+    }
+
+    return longest
+}
+
+// Using arguments:
+
+function longestString2() {
+    let longest = ""
+
+    for (let i = 0; i < arguments.length; i++) {
+        if (arguments[i].length > longest.length) {
+            longest = arguments[i]
+        }
+    }
+
+    return longest
+}
+
+
+// Challenge 6: Using the spread operator, return the string upperCased and reversed
+
+const str = "Hello World!"
+
+const reversedUppercasedStr = [...str.toUpperCase()].reverse().join()
